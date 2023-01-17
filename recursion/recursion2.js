@@ -150,4 +150,95 @@ function anagrams_of(text) {
     return collection;
 }
 
-console.log("abcd"[0].push("d"));
+// console.log("abcd"[0].push("d"));
+
+/**
+ * 연습문제 1
+ * 문자열 배열을 받아 각 문자열에 쓰인 문자 개수를 반환하는 함수를 재귀적으로 작성하라
+ */
+function findStringNum (arr) {
+    if(arr.length <= 1) {
+        return arr[0].split("").length;
+    }else {
+        return arr[0].split("").length + findStringNum(arr.slice(1, arr.length + 1));
+    }
+}
+
+/**
+ * 연습문제 2
+ * 수 배열을 받아 모든 문자열에 쓰인 문자 개수를 반환하는 함수를 재귀적으로 작성하라
+ */
+function selectEven (inputArr, outputArr = [], index = 0) {
+    const newArr = [...outputArr];
+
+    if(inputArr.length <= 1) {
+        //base case
+
+        if(inputArr[index] % 2 === 0) {
+            newArr.push(inputArr[index])
+        }
+
+        return newArr;
+    }else {
+
+        if(inputArr[index] % 2 === 0) {
+            newArr.push(inputArr[index])
+        }
+
+        return selectEven(inputArr.slice(1, inputArr.length + 1), newArr, index + 1);
+    }
+}
+
+const testArr = [];
+
+
+// console.log(selectEven(testArr));
+
+/**
+ * 연습문제 3 
+ * '삼각수'라는 수열이 있다. 1, 3, 6, 10, 15, 21로 시작해 패턴 내 N번째 수까지 일정 패턴이 이어진다. 
+ * N번째 값은 N에 바로 앞 숫자를 더한 값이다. 예를 들어 수열에서 7번째 수는 7에 21을 더한 28이다. 
+ * 숫자 N을 받아 수열 내 올바른 값을 반환하는 함수를 작성하라. 즉 함수에 숫자 7을 전달하면 함수는 28을 반환해야 한다.
+ */
+function findTrNumber () {
+    if(n < 1) {
+        // base case
+        // 0번째 값은 0
+        return 0
+    }else {
+        // recursion
+        // n번째 값은 n + 이전값
+        return n + findTrNumber(n - 1);
+    }
+}
+
+/**
+ * 연습문제 4
+ * 문자열을 받아 문자 "x"가 들어 간 첫 번째 인덱스를 반환하는 함수를 재귀적으로 작성하라.
+ * 예를 들어 문자열 "abcdefghijklmnopqrstuvwxyz" 애서 "x"는 인덱스 23에 있다.
+ * x는 무조건 한번 이상 나타난다.
+ */
+function findIndexOfX (str , i = 0) {
+    if(str.split("")[i] === "x") {
+        return i;
+    }else {
+        return findIndexOfX(str, i + 1);
+    }
+}
+
+/**
+ * 연습문제 5
+ * "유일 경로"라고 불리는 문제가 있다. 행과 열로 이뤄진 격자판이 있다고 하자.
+ * 행 수 와 열 수를 받아 왼쪽 맨 윗칸에서 오른쪽 맨 아랫칸까지 가는 "최단" 경로의 수를 계산하는 함수를 작성하라.
+ */
+
+function uniquePaths(rows, columns) {
+
+    if(rows === 1 || columns === 1) {
+        // base case
+        // 행 OR 열이 1 이면 경로는 무조건 1
+        return 1;
+    }else { 
+        return uniquePaths(rows - 1, columns) + uniquePaths(rows, columns + 1);
+    }
+}
